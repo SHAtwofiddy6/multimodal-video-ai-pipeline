@@ -1,3 +1,11 @@
-# docker-compose.yml
+version: '3.8'
 
-# Placeholder for docker-compose.yml
+services:
+  stream_receiver:
+    build: ./stream_receiver
+    environment:
+      - RTMP_URL=rtmp://your-server-ip/live/stream
+      - FRAME_OUTPUT=/frames
+    volumes:
+      - ./shared/frames:/frames
+    restart: unless-stopped# docker-compose.yml
