@@ -4,8 +4,16 @@ services:
   stream_receiver:
     build: ./stream_receiver
     environment:
-      - RTMP_URL=rtmp://your-server-ip/live/stream
+      - RTMP_URL=rtmp://0.0.0.0/live/stream
       - FRAME_OUTPUT=/frames
     volumes:
       - ./shared/frames:/frames
-    restart: unless-stopped# docker-compose.yml
+    restart: unless-stopped
+
+  detector:
+    build: ./detector
+    environment:
+      - FRAME_INPUT=/frames
+    volumes:
+      - ./shared/frames:/frames
+    restart: unless-stopped
